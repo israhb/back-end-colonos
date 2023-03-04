@@ -8,4 +8,7 @@ export class Estado {
     @Column({ type: 'varchar', length: 100, nullable: false, unique: true })
     name: string;
 
+    @Column()
+    activo: number;
+
 }

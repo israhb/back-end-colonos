@@ -19,6 +19,12 @@ export class EstadoService {
       }
     });
     if(estadoFound){
+      if(estadoFound.activo === 0){
+        estadoFound.activo = 1;
+        const id  = estadoFound.id;
+        this.estadoRepository.update({id}, estadoFound);
+        return estadoFound;
+      }
       return new HttpException('Estado ingresado ya existe en la base', HttpStatus.CONFLICT);
     }
     const newEstado = this.estadoRepository.create(createEstadoDto);
@@ -26,7 +32,11 @@ export class EstadoService {
   }
 
   findAll() {
-    return this.estadoRepository.find();
+    return this.estadoRepository.find({
+      where: {
+        activo: 1
+      }
+    });
   }
 
   async findOne(id: number) {
@@ -41,11 +51,30 @@ export class EstadoService {
     return estadoFound;
   }
 
-  update(id: number, updateEstadoDto: UpdateEstadoDto) {
+  async update(id: number, updateEstadoDto: UpdateEstadoDto) {
+    const estadoFound = await this.estadoRepository.findOne({
+      where: {
+        id
+      }
+    });
+    if(!estadoFound){
+      return new HttpException('Estado no Existe', HttpStatus.NOT_FOUND);
+    }
     return this.estadoRepository.update({id}, updateEstadoDto);
   }
 
-  remove(id: number) {
-    return this.estadoRepository.delete(id);
+  async remove(id: number) {
+    const estadoFound = await this.estadoRepository.findOne({
+      where: {
+        id,
+        activo: 1
+      }
+    });
+    if(!estadoFound){
+      return new HttpException('Estado no Existe', HttpStatus.NOT_FOUND);
+    }
+    estadoFound.activo = 0;
+    return this.estadoRepository.update({id}, estadoFound);
+    // return this.estadoRepository.delete(id);
   }
 }
