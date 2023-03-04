@@ -22,7 +22,7 @@ export class EstadoController {
 
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.estadoService.findOne(+id);
+    return this.estadoService.findOne(id);
   }
 
   @Patch(':id')

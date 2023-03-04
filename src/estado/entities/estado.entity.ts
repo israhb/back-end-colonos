@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Fraccionamiento } from "src/fraccionamiento/entities/fraccionamiento.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name: 'estado'})
 export class Estado {
@@ -11,4 +12,6 @@ export class Estado {
     @Column()
     activo: number;
 
+    @OneToMany(() => Fraccionamiento, fraccionamiento => fraccionamiento.estado_id)
+    fraccionamientos: Fraccionamiento[];
 }
