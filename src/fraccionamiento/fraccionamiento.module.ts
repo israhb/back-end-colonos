@@ -8,6 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
   imports: [ TypeOrmModule.forFeature([Fraccionamiento]), EstadoModule],
   controllers: [FraccionamientoController],
-  providers: [FraccionamientoService]
+  providers: [FraccionamientoService],
+  exports: [FraccionamientoService]
 })
 export class FraccionamientoModule {}

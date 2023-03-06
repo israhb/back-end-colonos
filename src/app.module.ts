@@ -5,6 +5,7 @@ import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USERNAME } from './config/co
 import { AuthModule } from './auth/auth.module';
 import { EstadoModule } from './estado/estado.module';
 import { FraccionamientoModule } from './fraccionamiento/fraccionamiento.module';
+import { FolioModule } from './folio/folio.module';
 
 @Module({
   imports: [
@@ -29,7 +30,8 @@ import { FraccionamientoModule } from './fraccionamiento/fraccionamiento.module'
     }),
     AuthModule,
     EstadoModule,
-    FraccionamientoModule
+    FraccionamientoModule,
+    FolioModule
   ],
   controllers: [],
   providers: [],

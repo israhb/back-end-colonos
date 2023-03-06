@@ -46,7 +46,8 @@ export class FraccionamientoService {
     const fracFound = await this.fraccionamientoRepository.findOne({
       where:{
         id
-      }
+      },
+      relations:['estado']
     });
     if(!fracFound){
       return new HttpException('Fraccionamiento no Existe', HttpStatus.NOT_FOUND);
