@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { EstadoModule } from './estado/estado.module';
 import { FraccionamientoModule } from './fraccionamiento/fraccionamiento.module';
 import { FolioModule } from './folio/folio.module';
+import { LevelModule } from './level/level.module';
 
 @Module({
   imports: [
@@ -31,7 +32,8 @@ import { FolioModule } from './folio/folio.module';
     AuthModule,
     EstadoModule,
     FraccionamientoModule,
-    FolioModule
+    FolioModule,
+    LevelModule
   ],
   controllers: [],
   providers: [],
