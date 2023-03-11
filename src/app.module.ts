@@ -11,6 +11,7 @@ import { TipoComunicadoModule } from './tipo_comunicado/tipo_comunicado.module';
 import { TipoNegocioModule } from './tipo_negocio/tipo_negocio.module';
 import { TipoPagoModule } from './tipo_pago/tipo_pago.module';
 import { TipoServicioModule } from './tipo_servicio/tipo_servicio.module';
+import { TipoTransporteModule } from './tipo_transporte/tipo_transporte.module';
 
 @Module({
   imports: [
@@ -41,7 +42,8 @@ import { TipoServicioModule } from './tipo_servicio/tipo_servicio.module';
     TipoComunicadoModule,
     TipoNegocioModule,
     TipoPagoModule,
-    TipoServicioModule
+    TipoServicioModule,
+    TipoTransporteModule
   ],
   controllers: [],
   providers: [],
