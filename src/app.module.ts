@@ -7,6 +7,7 @@ import { EstadoModule } from './estado/estado.module';
 import { FraccionamientoModule } from './fraccionamiento/fraccionamiento.module';
 import { FolioModule } from './folio/folio.module';
 import { LevelModule } from './level/level.module';
+import { TipoComunicadoModule } from './tipo_comunicado/tipo_comunicado.module';
 
 @Module({
   imports: [
@@ -33,7 +34,8 @@ import { LevelModule } from './level/level.module';
     EstadoModule,
     FraccionamientoModule,
     FolioModule,
-    LevelModule
+    LevelModule,
+    TipoComunicadoModule
   ],
   controllers: [],
   providers: [],

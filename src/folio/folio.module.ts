@@ -9,6 +9,7 @@ import { EstadoModule } from 'src/estado/estado.module';
 @Module({
   imports: [ TypeOrmModule.forFeature([Folio]), FraccionamientoModule, EstadoModule],
   controllers: [FolioController],
-  providers: [FolioService]
+  providers: [FolioService],
+  exports:[FolioService]
 })
 export class FolioModule {}
