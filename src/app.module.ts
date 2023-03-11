@@ -10,6 +10,7 @@ import { LevelModule } from './level/level.module';
 import { TipoComunicadoModule } from './tipo_comunicado/tipo_comunicado.module';
 import { TipoNegocioModule } from './tipo_negocio/tipo_negocio.module';
 import { TipoPagoModule } from './tipo_pago/tipo_pago.module';
+import { TipoServicioModule } from './tipo_servicio/tipo_servicio.module';
 
 @Module({
   imports: [
@@ -39,7 +40,8 @@ import { TipoPagoModule } from './tipo_pago/tipo_pago.module';
     LevelModule,
     TipoComunicadoModule,
     TipoNegocioModule,
-    TipoPagoModule
+    TipoPagoModule,
+    TipoServicioModule
   ],
   controllers: [],
   providers: [],
