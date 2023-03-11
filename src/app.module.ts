@@ -8,6 +8,7 @@ import { FraccionamientoModule } from './fraccionamiento/fraccionamiento.module'
 import { FolioModule } from './folio/folio.module';
 import { LevelModule } from './level/level.module';
 import { TipoComunicadoModule } from './tipo_comunicado/tipo_comunicado.module';
+import { TipoNegocioModule } from './tipo_negocio/tipo_negocio.module';
 
 @Module({
   imports: [
@@ -35,7 +36,8 @@ import { TipoComunicadoModule } from './tipo_comunicado/tipo_comunicado.module';
     FraccionamientoModule,
     FolioModule,
     LevelModule,
-    TipoComunicadoModule
+    TipoComunicadoModule,
+    TipoNegocioModule
   ],
   controllers: [],
   providers: [],
