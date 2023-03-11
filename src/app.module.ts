@@ -9,6 +9,7 @@ import { FolioModule } from './folio/folio.module';
 import { LevelModule } from './level/level.module';
 import { TipoComunicadoModule } from './tipo_comunicado/tipo_comunicado.module';
 import { TipoNegocioModule } from './tipo_negocio/tipo_negocio.module';
+import { TipoPagoModule } from './tipo_pago/tipo_pago.module';
 
 @Module({
   imports: [
@@ -37,7 +38,8 @@ import { TipoNegocioModule } from './tipo_negocio/tipo_negocio.module';
     FolioModule,
     LevelModule,
     TipoComunicadoModule,
-    TipoNegocioModule
+    TipoNegocioModule,
+    TipoPagoModule
   ],
   controllers: [],
   providers: [],
