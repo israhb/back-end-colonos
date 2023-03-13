@@ -12,6 +12,7 @@ import { TipoNegocioModule } from './tipo_negocio/tipo_negocio.module';
 import { TipoPagoModule } from './tipo_pago/tipo_pago.module';
 import { TipoServicioModule } from './tipo_servicio/tipo_servicio.module';
 import { TipoTransporteModule } from './tipo_transporte/tipo_transporte.module';
+import { TipoVisitaModule } from './tipo_visita/tipo_visita.module';
 
 @Module({
   imports: [
@@ -43,7 +44,8 @@ import { TipoTransporteModule } from './tipo_transporte/tipo_transporte.module';
     TipoNegocioModule,
     TipoPagoModule,
     TipoServicioModule,
-    TipoTransporteModule
+    TipoTransporteModule,
+    TipoVisitaModule
   ],
   controllers: [],
   providers: [],
