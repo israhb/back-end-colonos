@@ -17,6 +17,7 @@ import { ComunicadoModule } from './comunicado/comunicado.module';
 import { MonedaModule } from './moneda/moneda.module';
 import { ColonoModule } from './colono/colono.module';
 import { PagoModule } from './pago/pago.module';
+import { LoginCountModule } from './login_count/login_count.module';
 
 @Module({
   imports: [
@@ -53,7 +54,8 @@ import { PagoModule } from './pago/pago.module';
     ComunicadoModule,
     MonedaModule,
     ColonoModule,
-    PagoModule
+    PagoModule,
+    LoginCountModule
   ],
   controllers: [],
   providers: [],
