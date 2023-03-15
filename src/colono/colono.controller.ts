@@ -3,7 +3,9 @@ import { ColonoService } from './colono.service';
 import { CreateColonoDto } from './dto/create-colono.dto';
 import { UpdateColonoDto } from './dto/update-colono.dto';
 import { Colono } from './entities/colono.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('colono')
 @Controller('colono')
 export class ColonoController {
   constructor(private colonoService: ColonoService) {}
