@@ -18,6 +18,7 @@ import { MonedaModule } from './moneda/moneda.module';
 import { ColonoModule } from './colono/colono.module';
 import { PagoModule } from './pago/pago.module';
 import { LoginCountModule } from './login_count/login_count.module';
+import { NegocioModule } from './negocio/negocio.module';
 
 @Module({
   imports: [
@@ -55,7 +56,8 @@ import { LoginCountModule } from './login_count/login_count.module';
     MonedaModule,
     ColonoModule,
     PagoModule,
-    LoginCountModule
+    LoginCountModule,
+    NegocioModule
   ],
   controllers: [],
   providers: [],
