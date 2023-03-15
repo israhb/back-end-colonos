@@ -15,6 +15,7 @@ import { TipoTransporteModule } from './tipo_transporte/tipo_transporte.module';
 import { TipoVisitaModule } from './tipo_visita/tipo_visita.module';
 import { ComunicadoModule } from './comunicado/comunicado.module';
 import { MonedaModule } from './moneda/moneda.module';
+import { ColonoModule } from './colono/colono.module';
 
 @Module({
   imports: [
@@ -49,7 +50,8 @@ import { MonedaModule } from './moneda/moneda.module';
     TipoTransporteModule,
     TipoVisitaModule,
     ComunicadoModule,
-    MonedaModule
+    MonedaModule,
+    ColonoModule
   ],
   controllers: [],
   providers: [],
