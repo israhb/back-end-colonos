@@ -4,15 +4,29 @@ import { UpdateComunicadoDto } from './dto/update-comunicado.dto';
 import { Comunicado } from './entities/comunicado.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { TipoComunicadoService } from 'src/tipo_comunicado/tipo_comunicado.service';
+import { ColonoService } from 'src/colono/colono.service';
 
 @Injectable()
 export class ComunicadoService {
 
   constructor(
-    @InjectRepository(Comunicado)  private comunicadoRepository: Repository<Comunicado> 
+    @InjectRepository(Comunicado)  private comunicadoRepository: Repository<Comunicado>,
+    private tipoComunicado: TipoComunicadoService,
+    private colono : ColonoService
   ){}
 
   async create(createComunicadoDto: CreateComunicadoDto) {
+
+    const tipoComunicadoFound = await this.tipoComunicado.findOne(createComunicadoDto.tipo_comunicado_id);
+    if(tipoComunicadoFound.name == 'HttpException') {
+      return new HttpException('Tipo Comunicado no Existe', HttpStatus.NOT_FOUND);
+    }
+
+    const colonoFound = await this.colono.findOne(createComunicadoDto.colono_id, true);
+    if(!colonoFound) {
+      return new HttpException('Colono no Existe', HttpStatus.NOT_FOUND);
+    }
     const comunicadoFound = await this.comunicadoRepository.findOne({
       where:{
         name: createComunicadoDto.name

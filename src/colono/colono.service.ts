@@ -48,13 +48,14 @@ export class ColonoService {
     });
   }
 
-  async findOne(id: number) {
+  async findOne(id: number, externo?: boolean) {
     const colonoFound = await this.colonoRepository.findOne({
       where:{
         id
       }
     });
     if(!colonoFound){
+      if(externo) return false;
       return new HttpException('Colono no Existe', HttpStatus.NOT_FOUND);
     }
     return colonoFound;
