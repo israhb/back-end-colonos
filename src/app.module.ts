@@ -19,6 +19,7 @@ import { ColonoModule } from './colono/colono.module';
 import { PagoModule } from './pago/pago.module';
 import { LoginCountModule } from './login_count/login_count.module';
 import { NegocioModule } from './negocio/negocio.module';
+import { VisitaModule } from './visita/visita.module';
 
 @Module({
   imports: [
@@ -57,7 +58,8 @@ import { NegocioModule } from './negocio/negocio.module';
     ColonoModule,
     PagoModule,
     LoginCountModule,
-    NegocioModule
+    NegocioModule,
+    VisitaModule
   ],
   controllers: [],
   providers: [],
