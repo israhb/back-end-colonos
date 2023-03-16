@@ -19,9 +19,17 @@ export class LoginCountController {
   findAll(): Promise<LoginCount[]> {
     return this.loginCountService.findAll();
   }
+  @Get('getfolioMac')
+  findFolioMac(@Body() body: any) {
+    return this.loginCountService.findAllFolioMac(body);
+  }
 
+  @Post('getfolios')
+  findFolios(@Body() body: any) {
+    return this.loginCountService.findAllFolio(body);
+  }
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  findOneFolioMac(@Param('id', ParseIntPipe) id: number) {
     return this.loginCountService.findOne(id);
   }
 

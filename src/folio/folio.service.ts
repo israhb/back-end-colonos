@@ -57,6 +57,18 @@ export class FolioService {
       relations:['estado', 'fraccionamiento']
     });
   }
+  async findName(name: string) {
+    const folioFound = await this.folioRepository.findOne({
+      where:{
+        name
+      },
+      relations:['estado', 'fraccionamiento']
+    });
+    if(!folioFound){
+      throw new NotFoundException('No se encntro Folio');
+    }
+    return folioFound;
+  }
 /******************************* APIS EXTRAS ****************************************** */
   async findOne(id: number) {
     const folioFound = await this.folioRepository.findOne({

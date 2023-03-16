@@ -21,6 +21,25 @@ export class LoginCountService {
     return this.loginCountRepository.find();
   }
 
+  async findAllFolioMac(body: any) {
+    const loginCountFound = await this.loginCountRepository.findOne({
+      where:{
+        folio: body.name,
+        mac: body.mac
+      }
+    });
+    if(!loginCountFound){
+      return false;
+    }
+    return loginCountFound;
+  }
+  findAllFolio(body: any) {
+    return this.loginCountRepository.find({
+      where:{
+        folio: body.name
+      }
+    });
+  }
   async findOne(id: number) {
     const loginCountFound = await this.loginCountRepository.findOne({
       where:{

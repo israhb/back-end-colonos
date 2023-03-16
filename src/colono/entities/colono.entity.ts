@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import { Folio } from "src/folio/entities/folio.entity";
+import { Level } from "src/level/entities/level.entity";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 
 @Entity({name: 'colono'})
 export class Colono {
@@ -74,4 +76,13 @@ export class Colono {
 
     @Column()
     activo: number;
+
+    @ManyToOne(() => Folio, folio => folio.id)
+    @JoinColumn({name: 'folio_id'})
+    folio: Folio;
+
+    @ManyToOne(() => Level, level => level.id)
+    @JoinColumn({name: 'level_id'})
+    level: Level;
+
 }

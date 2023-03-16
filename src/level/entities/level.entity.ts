@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import { Colono } from "src/colono/entities/colono.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 
 @Entity({name: 'level'})
 export class Level {
@@ -14,4 +15,7 @@ export class Level {
 
     @Column()
     activo: number;
+
+    @OneToMany(() => Colono, colono => colono.folio_id)
+    colono: Colono[];
 }

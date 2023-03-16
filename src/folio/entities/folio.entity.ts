@@ -1,6 +1,7 @@
+import { Colono } from "src/colono/entities/colono.entity";
 import { Estado } from "src/estado/entities/estado.entity";
 import { Fraccionamiento } from "src/fraccionamiento/entities/fraccionamiento.entity";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name: 'folio'})
 export class Folio {
@@ -38,4 +39,8 @@ export class Folio {
     @ManyToOne(() => Fraccionamiento, fraccionamiento => fraccionamiento.id)
     @JoinColumn({name: 'frac_id'})
     fraccionamiento: Fraccionamiento;
+
+    @OneToMany(() => Colono, colono => colono.folio_id)
+    @JoinColumn({name: 'folio_id'})
+    colono: Colono[];
 }

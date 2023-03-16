@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USERNAME } from './config/constants';
-import { AuthModule } from './auth/auth.module';
 import { EstadoModule } from './estado/estado.module';
 import { FraccionamientoModule } from './fraccionamiento/fraccionamiento.module';
 import { FolioModule } from './folio/folio.module';
@@ -43,7 +42,6 @@ import { ServiceGeneralService } from './service-general/service-general/service
       }),
       inject: [ConfigService],
     }),
-    AuthModule,
     EstadoModule,
     FraccionamientoModule,
     FolioModule,

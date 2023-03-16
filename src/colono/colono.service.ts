@@ -7,6 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { FolioService } from 'src/folio/folio.service';
 import { LevelService } from 'src/level/level.service';
 import { ServiceGeneralService } from 'src/service-general/service-general/service-general.service';
+import { LoginCountService } from 'src/login_count/login_count.service';
 
 @Injectable()
 export class ColonoService {
@@ -17,6 +18,7 @@ export class ColonoService {
     @InjectRepository(Colono)  private colonoRepository: Repository<Colono>,
     private folioService: FolioService,
     private levelService: LevelService,
+    private loginCount: LoginCountService,
     private serviceGeneralService: ServiceGeneralService
   ){}
 
@@ -48,14 +50,15 @@ export class ColonoService {
     return this.colonoRepository.find({
       where: {
         activo: 1
-      }
+      },
+      relations:['folio', 'level']
     });
   }
 
   async registerColono(body: any){
     const folioFound = await this.folioService.findOne(body.folio_id);
     if(!folioFound){
-      throw new NotFoundException('No se encntro Folio');
+      throw new NotFoundException('No se encontro Folio');
     }
     if(folioFound.nuevo == 0){
       folioFound.nuevo = 1;
@@ -75,11 +78,74 @@ export class ColonoService {
     }
   }
 
+  async loginColono(folio_pass: any){
+    ///verificar que el folio existe y sacar el folio para verificar id
+    const folioFound = await this.folioService.findName(folio_pass.name);
+    if(!folioFound){
+      throw new NotFoundException('No se encontro Folio');
+    }
+    //una vez encontrado se verifica el estatus del colono
+    const colonoFound = await this.colonoRepository.findOne({
+      where:{
+        folio_id: folioFound.id,
+        password: folio_pass.password
+      },
+      relations:['folio', 'level']
+    });
+    if(!colonoFound){
+      throw new NotFoundException('No se encontro Colono');
+    }
+    if(colonoFound.level_id == 1 || colonoFound.level_id == 2 || colonoFound.level_id == 3 ){
+      return colonoFound;
+    }else{
+      if(colonoFound.level_id == 4){
+        const countFolios = {
+          name: folio_pass.name
+        }
+        const foundLoginCount = this.loginCount.findAllFolio(countFolios);
+        if((await foundLoginCount).length < 5){
+          //logica para login count
+          const comparraFM = {
+            name: folio_pass.name,
+            mac: folio_pass.mac
+          }
+          const foundLogin = await this.loginCount.findAllFolioMac(comparraFM);
+          //si no hay algun registro de login se inserta y logea
+          if(!foundLogin){
+            const crearFolioR = {
+                folio: folio_pass.name,
+                mac: folio_pass.mac,
+                upload_date: this.serviceGeneralService.getDateNowAMD()
+            };
+            this.loginCount.create(crearFolioR);
+            return colonoFound;
+          }else{
+            return colonoFound;
+          }
+        }else{
+          //logica para login count
+          const comparraFM = {
+            name: folio_pass.name,
+            mac: folio_pass.mac
+          }
+          const foundLogin = await this.loginCount.findAllFolioMac(comparraFM);
+          //si no hay algun registro de login se inserta y logea
+          if(!foundLogin){
+            throw new NotFoundException('Se exedieron los usuarios por cuenta');
+          }else{
+            return colonoFound;
+          }
+        }
+      }
+    }
+  }
+
   async findOne(id: number, externo?: boolean) {
     const colonoFound = await this.colonoRepository.findOne({
       where:{
         id
-      }
+      },
+      relations:['folio', 'level']
     });
     if(!colonoFound){
       if(externo) return false;

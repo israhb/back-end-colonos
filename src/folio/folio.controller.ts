@@ -24,6 +24,10 @@ export class FolioController {
   findNotRegister():Promise<Folio[]> {
     return this.folioService.getFoliosNoRegistrados()
   }
+  @Get('porNombre/:name')
+  findOneName(@Param('name') name: string) {
+    return this.folioService.findName(name);
+  }
 /****************************** APIS EXTRAS ****************************************** */
 
   @Get(':id')

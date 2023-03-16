@@ -25,6 +25,11 @@ export class ColonoController {
     return this.colonoService.registerColono(body);
   }
 
+  @Post('loginColono')
+  loginColono(@Body() body: any) {
+    return this.colonoService.loginColono(body);
+  }
+
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.colonoService.findOne(id);

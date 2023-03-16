@@ -6,12 +6,14 @@ import { Colono } from './entities/colono.entity';
 import { FolioModule } from 'src/folio/folio.module';
 import { LevelModule } from 'src/level/level.module';
 import { ServiceGeneralService } from 'src/service-general/service-general/service-general.service';
+import { LoginCountModule } from 'src/login_count/login_count.module';
 
 @Module({
   imports:[
     TypeOrmModule.forFeature([Colono]),
     FolioModule,
-    LevelModule
+    LevelModule,
+    LoginCountModule
   ],
   controllers: [ColonoController],
   providers: [ColonoService, ServiceGeneralService],
