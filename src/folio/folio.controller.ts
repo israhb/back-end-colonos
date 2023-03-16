@@ -9,7 +9,7 @@ import { Folio } from './entities/folio.entity';
 @Controller('folio')
 export class FolioController {
   constructor(private folioService: FolioService) {}
-
+/************************************** CRUD ************************************************ */
   @Post()
   create(@Body() createFolioDto: CreateFolioDto) {
     return this.folioService.create(createFolioDto);
@@ -19,6 +19,12 @@ export class FolioController {
   findAll(): Promise<Folio[]> {
     return this.folioService.findAll();
   }
+/****************************** APIS EXTRAS ****************************************** */
+  @Get('noRegistrados')
+  findNotRegister():Promise<Folio[]> {
+    return this.folioService.getFoliosNoRegistrados()
+  }
+/****************************** APIS EXTRAS ****************************************** */
 
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
@@ -34,4 +40,5 @@ export class FolioController {
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.folioService.remove(id);
   }
+/************************************** FIN CRUD ************************************************ */
 }

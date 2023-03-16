@@ -1,4 +1,4 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateFolioDto } from './dto/create-folio.dto';
 import { UpdateFolioDto } from './dto/update-folio.dto';
 import { Folio } from './entities/folio.entity';
@@ -15,15 +15,15 @@ export class FolioService {
     private estadoService: EstadoService,
     private fraccionamientoService: FraccionamientoService
   ){}
-
+/******************************************** CRUD *************************************************************** */
   async create(createFolioDto: CreateFolioDto) {
     const estadoFound = await this.estadoService.findOne(createFolioDto.estado_id);
     if(estadoFound.name == 'HttpException') {
-      return new HttpException('Estado no Existe', HttpStatus.NOT_FOUND);
+      return new NotFoundException('Estado no Existe');
     }
     const fraccionamientoFound = await this.fraccionamientoService.findOne(createFolioDto.frac_id);
     if(fraccionamientoFound.name == 'HttpException') {
-      return new HttpException('Fraccionamiento no Existe', HttpStatus.NOT_FOUND);
+      return new NotFoundException('Fraccionamiento no Existe');
     }
     const folioFound = await this.folioRepository.findOne({ where: { name: createFolioDto.name } })
     if(folioFound){
@@ -33,7 +33,7 @@ export class FolioService {
         this.folioRepository.update({id}, folioFound);
         return folioFound;
       }
-      return new HttpException('Folio ingresado ya existe en la base', HttpStatus.CONFLICT);
+      return new NotFoundException('Folio ingresado ya existe en la base');
     }
     const newFolio = this.folioRepository.create(createFolioDto);
     return this.folioRepository.save(newFolio);
@@ -47,7 +47,17 @@ export class FolioService {
       relations:['estado', 'fraccionamiento']
     });
   }
-
+/******************************* APIS EXTRAS ****************************************** */
+  getFoliosNoRegistrados(){
+    return this.folioRepository.find({
+      where:{
+        activo: 1,
+        nuevo: 0
+      },
+      relations:['estado', 'fraccionamiento']
+    });
+  }
+/******************************* APIS EXTRAS ****************************************** */
   async findOne(id: number) {
     const folioFound = await this.folioRepository.findOne({
       where:{
@@ -56,7 +66,7 @@ export class FolioService {
       relations:['estado', 'fraccionamiento']
     });
     if(!folioFound){
-      return new HttpException('Folio no Existe', HttpStatus.NOT_FOUND);
+      throw new NotFoundException('No se encntro Folio');
     }
     return folioFound;
   }
@@ -68,7 +78,7 @@ export class FolioService {
       }
     });
     if(!folioFound){
-      return new HttpException('Folio no Existe', HttpStatus.NOT_FOUND);
+      return new NotFoundException('Folio no Existe');
     }
     return this.folioRepository.update({id}, updateFolioDto);
   }
@@ -81,10 +91,12 @@ export class FolioService {
       }
     });
     if(!folioFound){
-      return new HttpException('Folio no Existe', HttpStatus.NOT_FOUND);
+      return new NotFoundException('Folio no Existe');
     }
     folioFound.activo = 0;
     return this.folioRepository.update({id}, folioFound);
     // return this.estadoRepository.delete(id);
   }
+  /******************************************** FIN CRUD *************************************************************** */
+
 }

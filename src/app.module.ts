@@ -20,6 +20,7 @@ import { PagoModule } from './pago/pago.module';
 import { LoginCountModule } from './login_count/login_count.module';
 import { NegocioModule } from './negocio/negocio.module';
 import { VisitaModule } from './visita/visita.module';
+import { ServiceGeneralService } from './service-general/service-general/service-general.service';
 
 @Module({
   imports: [
@@ -62,6 +63,6 @@ import { VisitaModule } from './visita/visita.module';
     VisitaModule
   ],
   controllers: [],
-  providers: [],
+  providers: [ServiceGeneralService],
 })
 export class AppModule {}

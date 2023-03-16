@@ -1,4 +1,4 @@
-import { Injectable,  HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable,  HttpException, HttpStatus, NotFoundException } from '@nestjs/common';
 import { CreateColonoDto } from './dto/create-colono.dto';
 import { UpdateColonoDto } from './dto/update-colono.dto';
 import { Colono } from './entities/colono.entity';
@@ -6,14 +6,18 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FolioService } from 'src/folio/folio.service';
 import { LevelService } from 'src/level/level.service';
+import { ServiceGeneralService } from 'src/service-general/service-general/service-general.service';
 
 @Injectable()
 export class ColonoService {
 
+  createDtoColono: CreateColonoDto;
+
   constructor(
     @InjectRepository(Colono)  private colonoRepository: Repository<Colono>,
     private folioService: FolioService,
-    private levelService: LevelService
+    private levelService: LevelService,
+    private serviceGeneralService: ServiceGeneralService
   ){}
 
 
@@ -46,6 +50,29 @@ export class ColonoService {
         activo: 1
       }
     });
+  }
+
+  async registerColono(body: any){
+    const folioFound = await this.folioService.findOne(body.folio_id);
+    if(!folioFound){
+      throw new NotFoundException('No se encntro Folio');
+    }
+    if(folioFound.nuevo == 0){
+      folioFound.nuevo = 1;
+      folioFound.mac = body.mac;
+      folioFound.upload_date = this.serviceGeneralService.getDateNowAMD();
+      folioFound.upload_time = this.serviceGeneralService.getHourNow();
+      this.folioService.update(folioFound.id, folioFound);
+      ///eliminar item mac para insertar colono
+      const keys = Object.keys(body);
+      const indexKeyToDelete = 0;
+      delete body[keys[indexKeyToDelete]];
+      this.createDtoColono = {...body};
+      const newColono = this.colonoRepository.create(this.createDtoColono);
+      return this.colonoRepository.save(newColono);
+    }else{
+      throw new NotFoundException('Folio ya registrado');
+    }
   }
 
   async findOne(id: number, externo?: boolean) {
