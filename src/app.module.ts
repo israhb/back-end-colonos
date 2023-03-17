@@ -21,6 +21,7 @@ import { NegocioModule } from './negocio/negocio.module';
 import { VisitaModule } from './visita/visita.module';
 import { ServiceGeneralService } from './service-general/service-general/service-general.service';
 import { ModulosModule } from './modulos/modulos.module';
+import { PermisosModule } from './permisos/permisos.module';
 
 @Module({
   imports: [
@@ -60,7 +61,8 @@ import { ModulosModule } from './modulos/modulos.module';
     LoginCountModule,
     NegocioModule,
     VisitaModule,
-    ModulosModule
+    ModulosModule,
+    PermisosModule
   ],
   controllers: [],
   providers: [ServiceGeneralService],
