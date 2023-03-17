@@ -20,6 +20,7 @@ import { LoginCountModule } from './login_count/login_count.module';
 import { NegocioModule } from './negocio/negocio.module';
 import { VisitaModule } from './visita/visita.module';
 import { ServiceGeneralService } from './service-general/service-general/service-general.service';
+import { ModulosModule } from './modulos/modulos.module';
 
 @Module({
   imports: [
@@ -58,7 +59,8 @@ import { ServiceGeneralService } from './service-general/service-general/service
     PagoModule,
     LoginCountModule,
     NegocioModule,
-    VisitaModule
+    VisitaModule,
+    ModulosModule
   ],
   controllers: [],
   providers: [ServiceGeneralService],
