@@ -8,6 +8,8 @@ import { FolioService } from 'src/folio/folio.service';
 import { LevelService } from 'src/level/level.service';
 import { ServiceGeneralService } from 'src/service-general/service-general/service-general.service';
 import { LoginCountService } from 'src/login_count/login_count.service';
+import { PermisosService } from 'src/permisos/permisos.service';
+import { ModulosService } from 'src/modulos/modulos.service';
 
 @Injectable()
 export class ColonoService {
@@ -19,6 +21,8 @@ export class ColonoService {
     private folioService: FolioService,
     private levelService: LevelService,
     private loginCount: LoginCountService,
+    private permisosService: PermisosService,
+    private modulosService: ModulosService,
     private serviceGeneralService: ServiceGeneralService
   ){}
 
@@ -96,9 +100,29 @@ export class ColonoService {
       throw new NotFoundException('No se encontro Colono');
     }
     if(colonoFound.level_id == 1 || colonoFound.level_id == 2 || colonoFound.level_id == 3 ){
-      return colonoFound;
+      /***************************** ENTRAN LOS DE NIVEL ADMIN PARA WEB Y APP ******************************************** */
+      const permisosName: string[] = [];
+      const modulosName: string[] = [];
+      const arrayPermisos = await this.permisosService.findPermisosforLevel(colonoFound.level_id);
+      const arrayModulos  = await this.modulosService.findModulosforLevel(colonoFound.level_id); 
+      arrayPermisos.forEach(element => {
+        permisosName.push(element.name);
+      });
+      arrayModulos.forEach(element => {
+        modulosName.push(element.name);
+      });
+      const permisos = {
+        actions: permisosName,
+        modulos:modulosName
+      };
+      const colono = {
+        colono: colonoFound,
+        permisos
+      }
+      return colono;
     }else{
       if(colonoFound.level_id == 4){
+        /***************************** ENTRAN LOS  APP ******************************************** */
         const countFolios = {
           name: folio_pass.name
         }

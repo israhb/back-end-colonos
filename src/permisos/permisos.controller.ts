@@ -20,6 +20,11 @@ export class PermisosController {
     return this.permisosService.findAll();
   }
 
+  @Get('permisosLevel/:level_id')
+  findPermisosforLevel(@Param('level_id', ParseIntPipe) level_id: number) {
+    return this.permisosService.findPermisosforLevel(level_id);
+  }
+
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.permisosService.findOne(id);

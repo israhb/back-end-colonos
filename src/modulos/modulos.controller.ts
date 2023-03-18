@@ -20,6 +20,11 @@ export class ModulosController {
     return this.modulosService.findAll();
   }
 
+  @Get('modulosLevel/:level_id')
+  findPermisosforLevel(@Param('level_id', ParseIntPipe) level_id: number) {
+    return this.modulosService.findModulosforLevel(level_id);
+  }
+
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.modulosService.findOne(id);

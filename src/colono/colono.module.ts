@@ -7,13 +7,17 @@ import { FolioModule } from 'src/folio/folio.module';
 import { LevelModule } from 'src/level/level.module';
 import { ServiceGeneralService } from 'src/service-general/service-general/service-general.service';
 import { LoginCountModule } from 'src/login_count/login_count.module';
+import { PermisosModule } from 'src/permisos/permisos.module';
+import { ModulosModule } from 'src/modulos/modulos.module';
 
 @Module({
   imports:[
     TypeOrmModule.forFeature([Colono]),
     FolioModule,
     LevelModule,
-    LoginCountModule
+    LoginCountModule,
+    PermisosModule,
+    ModulosModule
   ],
   controllers: [ColonoController],
   providers: [ColonoService, ServiceGeneralService],

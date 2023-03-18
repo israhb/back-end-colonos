@@ -4,6 +4,7 @@ import { UpdatePermisoDto } from './dto/update-permiso.dto';
 import { Permiso } from './entities/permiso.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { RelacionLevelPermiso } from 'src/relacion_level_permisos/entities/relacion_level_permiso.entity';
 
 @Injectable()
 export class PermisosService {
@@ -37,6 +38,16 @@ export class PermisosService {
         activo: 1
       }
     });
+  }
+
+  async findPermisosforLevel(level_id: number){
+    // const activo = 1;
+    return await this.permisoRepository.createQueryBuilder('permisos')
+    .select(['permisos.name as name'])
+    .where('permisos.id = r_l_p.permiso_id')
+    .andWhere('r_l_p.level_id = :level_id', {level_id})
+    .innerJoin(RelacionLevelPermiso, 'r_l_p')
+    .getRawMany();
   }
 
   async findOne(id: number) {
