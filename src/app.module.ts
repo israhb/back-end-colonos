@@ -23,6 +23,7 @@ import { ServiceGeneralService } from './service-general/service-general/service
 import { ModulosModule } from './modulos/modulos.module';
 import { PermisosModule } from './permisos/permisos.module';
 import { RelacionLevelModulosModule } from './relacion_level_modulos/relacion_level_modulos.module';
+import { RelacionLevelPermisosModule } from './relacion_level_permisos/relacion_level_permisos.module';
 
 @Module({
   imports: [
@@ -64,7 +65,8 @@ import { RelacionLevelModulosModule } from './relacion_level_modulos/relacion_le
     VisitaModule,
     ModulosModule,
     PermisosModule,
-    RelacionLevelModulosModule
+    RelacionLevelModulosModule,
+    RelacionLevelPermisosModule
   ],
   controllers: [],
   providers: [ServiceGeneralService],

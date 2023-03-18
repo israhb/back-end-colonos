@@ -5,7 +5,7 @@ import { UpdateRelacionLevelModuloDto } from './dto/update-relacion_level_modulo
 import { RelacionLevelModulo } from './entities/relacion_level_modulo.entity';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('relacion-nivel-permisos')
+@ApiTags('relacion-nivel-modulos')
 @Controller('relacion-level-modulos')
 export class RelacionLevelModulosController {
   constructor(private relacionLevelModulosService: RelacionLevelModulosService) {}
