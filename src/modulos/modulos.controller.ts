@@ -3,7 +3,9 @@ import { ModulosService } from './modulos.service';
 import { CreateModuloDto } from './dto/create-modulo.dto';
 import { UpdateModuloDto } from './dto/update-modulo.dto';
 import { Modulo } from './entities/modulo.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('modulos')
 @Controller('modulos')
 export class ModulosController {
   constructor(private modulosService: ModulosService) {}

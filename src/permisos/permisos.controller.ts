@@ -3,7 +3,9 @@ import { PermisosService } from './permisos.service';
 import { CreatePermisoDto } from './dto/create-permiso.dto';
 import { UpdatePermisoDto } from './dto/update-permiso.dto';
 import { Permiso } from './entities/permiso.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('permisos')
 @Controller('permisos')
 export class PermisosController {
   constructor(private permisosService: PermisosService) {}
