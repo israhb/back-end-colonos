@@ -44,6 +44,9 @@ export class FolioService {
       where:{
         activo: 1
       },
+      order:{
+        id: "DESC"
+      },
       relations:['estado', 'fraccionamiento']
     });
   }

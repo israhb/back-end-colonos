@@ -10,8 +10,6 @@ export class CreateFolioDto {
     @Length(1, 50)
     name: string;
 
-    @IsNotEmpty()
-    @Length(1, 200)
     mac: string;
 
     @IsNotEmpty()

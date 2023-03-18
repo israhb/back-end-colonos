@@ -11,7 +11,7 @@ export class Folio {
     @Column({ type: 'varchar', length: 100, nullable: false, unique: true })
     name: string;
 
-    @Column({ type: 'varchar', length: 200, nullable: false, unique: true })
+    @Column({ type: 'varchar', length: 200, nullable: true, unique: true })
     mac: string;
 
     @Column({ type: 'int', nullable: false })
