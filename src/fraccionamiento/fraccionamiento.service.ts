@@ -42,6 +42,25 @@ export class FraccionamientoService {
     });
   }
 
+  async findforEstado(estado_id: number){
+    const estadoFound = await this.estadoService.findOne(estado_id);
+    if(estadoFound.name == 'HttpException') {
+      return new HttpException('Estado no Existe', HttpStatus.NOT_FOUND);
+    }
+    const fracFound = await this.fraccionamientoRepository.find({
+      where:{
+        estado_id: estado_id
+      },
+      order:{
+        id: "DESC"
+      }
+    });
+    if(!fracFound){
+      return new HttpException('Fraccionamiento no Existe', HttpStatus.NOT_FOUND);
+    }
+    return fracFound;
+  }
+
   async findOne(id: number) {
     const fracFound = await this.fraccionamientoRepository.findOne({
       where:{

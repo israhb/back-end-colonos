@@ -20,6 +20,11 @@ export class FraccionamientoController {
     return this.fraccionamientoService.findAll();
   }
 
+  @Get('forEstadoId/:estado_id')
+  findForEstado(@Param('estado_id') estado_id: number) {
+    return this.fraccionamientoService.findforEstado(estado_id);
+  }
+
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.fraccionamientoService.findOne(id);
