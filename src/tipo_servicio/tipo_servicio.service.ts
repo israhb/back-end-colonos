@@ -35,6 +35,9 @@ export class TipoServicioService {
     return this.tipoServicioRepository.find({
       where: {
         activo: 1
+      },
+      order:{
+        id: "DESC"
       }
     });
   }
