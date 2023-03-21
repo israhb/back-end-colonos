@@ -35,7 +35,10 @@ export class EstadoService {
     return this.estadoRepository.find({
       where: {
         activo: 1
-      }
+      },
+      order:{
+        id: "DESC"
+      },
     });
   }
 
