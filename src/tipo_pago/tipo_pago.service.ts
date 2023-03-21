@@ -35,6 +35,9 @@ export class TipoPagoService {
     return this.tipoPagoRepository.find({
       where: {
         activo: 1
+      },
+      order:{
+        id: "DESC"
       }
     });
   }
