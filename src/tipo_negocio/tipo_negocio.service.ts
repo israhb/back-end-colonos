@@ -35,7 +35,10 @@ export class TipoNegocioService {
     return this.tipoNegocioRepository.find({
       where:{
         activo: 1
-      }
+      },
+      order:{
+        id: "DESC"
+      },
     });
   }
 
