@@ -35,6 +35,9 @@ export class TipoComunicadoService {
     return this.tipoComunicadoRepository.find({
       where:{
         activo: 1
+      },
+      order:{
+        id: "DESC"
       }
     });
   }

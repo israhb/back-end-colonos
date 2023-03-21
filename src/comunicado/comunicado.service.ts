@@ -49,6 +49,9 @@ export class ComunicadoService {
     return this.comunicadoRepository.find({
       where:{
         activo: 1
+      },
+      order:{
+        id: "DESC"
       }
     });
   }
