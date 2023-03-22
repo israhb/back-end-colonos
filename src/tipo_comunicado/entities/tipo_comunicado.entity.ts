@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import { Comunicado } from "src/comunicado/entities/comunicado.entity";
+import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 
 @Entity({name: 'tipo_comunicado'})
 export class TipoComunicado {
@@ -11,4 +12,8 @@ export class TipoComunicado {
 
     @Column()
     activo: number;
+
+    @OneToMany(() => Comunicado, comunicado => comunicado.tipo_comunicado_id)
+    @JoinColumn({name: 'id'})
+    comunicado: Comunicado;
 }

@@ -52,7 +52,8 @@ export class ComunicadoService {
       },
       order:{
         id: "DESC"
-      }
+      },
+      relations:['colono', 'tipoComunicado']
     });
   }
 

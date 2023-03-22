@@ -1,6 +1,6 @@
 import { Colono } from "src/colono/entities/colono.entity";
 import { TipoPago } from "src/tipo_pago/entities/tipo_pago.entity";
-import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name: 'pago'})
 export class Pago {

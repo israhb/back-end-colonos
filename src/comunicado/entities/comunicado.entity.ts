@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import { Colono } from "src/colono/entities/colono.entity";
+import { TipoComunicado } from "src/tipo_comunicado/entities/tipo_comunicado.entity";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 
 @Entity({name: 'comunicado'})
 export class Comunicado {
@@ -22,4 +24,12 @@ export class Comunicado {
 
     @Column()
     activo: number;
+
+    @ManyToOne(() => Colono, colono => colono.id)
+    @JoinColumn({name: 'colono_id'})
+    colono: Colono;
+
+    @ManyToOne(() => TipoComunicado, tipo_comunicado => tipo_comunicado.id)
+    @JoinColumn({name: 'tipo_comunicado_id'})
+    tipoComunicado: TipoComunicado;
 }
