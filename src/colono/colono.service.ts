@@ -55,6 +55,22 @@ export class ColonoService {
       where: {
         activo: 1
       },
+      order:{
+        id: "DESC"
+      },
+      relations:['folio', 'level']
+    });
+  }
+
+  findAllTipoColonosLevel() {
+    return this.colonoRepository.find({
+      where: {
+        activo: 1,
+        level_id: 4
+      },
+      order:{
+        id: "DESC"
+      },
       relations:['folio', 'level']
     });
   }

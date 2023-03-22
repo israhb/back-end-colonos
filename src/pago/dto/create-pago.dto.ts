@@ -14,4 +14,10 @@ export class CreatePagoDto {
     @IsNotEmpty()
     monto: number;
 
+    @IsNotEmpty()
+    upload_date: string;
+
+    @IsNotEmpty()
+    upload_time: string;
+
 }

@@ -20,6 +20,11 @@ export class ColonoController {
     return this.colonoService.findAll();
   }
 
+  @Get('level-colono')
+  findAllColonos(): Promise<Colono[]> {
+    return this.colonoService.findAllTipoColonosLevel();
+  }
+
   @Post('registrarColono')
   registerColono(@Body() body: any) {
     return this.colonoService.registerColono(body);

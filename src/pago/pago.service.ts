@@ -45,7 +45,11 @@ export class PagoService {
     return this.pagoRepository.find({
       where:{
         activo: 1
-      }
+      },
+      order:{
+        id: "DESC"
+      },
+      relations:['colono', 'tipoPago']
     });
   }
 

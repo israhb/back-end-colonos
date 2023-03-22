@@ -1,6 +1,7 @@
 import { Folio } from "src/folio/entities/folio.entity";
 import { Level } from "src/level/entities/level.entity";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import { Pago } from "src/pago/entities/pago.entity";
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 
 @Entity({name: 'colono'})
 export class Colono {
@@ -84,5 +85,9 @@ export class Colono {
     @ManyToOne(() => Level, level => level.id)
     @JoinColumn({name: 'level_id'})
     level: Level;
+
+    @OneToMany(() => Pago, pago => pago.colono_id)
+    @JoinColumn({name: 'id'})
+    pago: Pago;
 
 }

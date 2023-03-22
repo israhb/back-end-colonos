@@ -35,6 +35,9 @@ export class TipoVisitaService {
     return this.tipoVisitaRepository.find({
       where:{
         activo: 1
+      },
+      order:{
+        id: "DESC"
       }
     });
   }

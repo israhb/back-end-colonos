@@ -35,6 +35,9 @@ export class TipoTransporteService {
     return this.tipoTransporteRepository.find({
       where:{
         activo: 1
+      },
+      order:{
+        id: "DESC"
       }
     });
   }
