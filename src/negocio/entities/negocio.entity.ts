@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Colono } from "src/colono/entities/colono.entity";
+import { TipoNegocio } from "src/tipo_negocio/entities/tipo_negocio.entity";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name: 'negocio'})
 export class Negocio {
@@ -44,5 +46,13 @@ export class Negocio {
 
     @Column()
     activo: number;
+
+    @ManyToOne(() => Colono, colono => colono.id)
+    @JoinColumn({name: 'colono_id'})
+    colono: Colono;
+
+    @ManyToOne(() => TipoNegocio, tipo_negocio => tipo_negocio.id)
+    @JoinColumn({name: 'tipo_negocio_id'})
+    tipoNegocio: TipoNegocio;
    
 }

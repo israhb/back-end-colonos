@@ -1,6 +1,7 @@
 import { Comunicado } from "src/comunicado/entities/comunicado.entity";
 import { Folio } from "src/folio/entities/folio.entity";
 import { Level } from "src/level/entities/level.entity";
+import { Negocio } from "src/negocio/entities/negocio.entity";
 import { Pago } from "src/pago/entities/pago.entity";
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 
@@ -94,5 +95,9 @@ export class Colono {
     @OneToMany(() => Comunicado, comunicado => comunicado.colono_id)
     @JoinColumn({name: 'id'})
     comunicado: Comunicado;
+
+    @OneToMany(() => Negocio, negocio => negocio.colono_id)
+    @JoinColumn({name: 'id'})
+    negocio: Negocio;
 
 }

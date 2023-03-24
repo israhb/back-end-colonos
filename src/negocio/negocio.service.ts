@@ -46,7 +46,11 @@ export class NegocioService {
     return this.negocioRepository.find({
       where:{
         activo: 1
-      }
+      },
+      order:{
+        id: "DESC"
+      },
+      relations:['colono', 'tipoNegocio']
     });
   }
 
