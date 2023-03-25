@@ -56,7 +56,11 @@ export class VisitaService {
     return this.visitaRepository.find({
       where:{
         activo: 1
-      }
+      },
+      order:{
+        id: "DESC"
+      },
+      relations:['colono', 'tipoVisita', 'tipoServicio', 'tipoTransporte']
     });
   }
 

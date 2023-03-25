@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import { Visita } from "src/visita/entities/visita.entity";
+import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 
 @Entity({name: 'tipo_visita'})
 export class TipoVisita {
@@ -10,4 +11,8 @@ export class TipoVisita {
 
     @Column()
     activo: number;
+
+    @OneToMany(() => Visita, visita => visita.tipo_visita_id)
+    @JoinColumn({name: 'id'})
+    visita: Visita;
 }

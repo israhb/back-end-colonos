@@ -1,4 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Colono } from "src/colono/entities/colono.entity";
+import { TipoServicio } from "src/tipo_servicio/entities/tipo_servicio.entity";
+import { TipoTransporte } from "src/tipo_transporte/entities/tipo_transporte.entity";
+import { TipoVisita } from "src/tipo_visita/entities/tipo_visita.entity";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name: 'visita'})
 export class Visita {
@@ -53,4 +57,20 @@ export class Visita {
 
     @Column()
     activo: number;
+
+    @ManyToOne(() => Colono, colono => colono.id)
+    @JoinColumn({name: 'colono_id'})
+    colono: Colono;
+
+    @ManyToOne(() => TipoVisita, tipo_visita => tipo_visita.id)
+    @JoinColumn({name: 'tipo_visita_id'})
+    tipoVisita: TipoVisita;
+
+    @ManyToOne(() => TipoServicio, tipo_servicio => tipo_servicio.id)
+    @JoinColumn({name: 'tipo_servicio_id'})
+    tipoServicio: TipoServicio;
+
+    @ManyToOne(() => TipoTransporte, tipo_transporte => tipo_transporte.id)
+    @JoinColumn({name: 'tipo_transporte_id'})
+    tipoTransporte: TipoTransporte;
 }
