@@ -25,6 +25,11 @@ export class ColonoController {
     return this.colonoService.findAllTipoColonosLevel();
   }
 
+  @Post('registrarColonoData')
+  registerColonoData(@Body() body: any) {
+    return this.colonoService.registerColonoData(body);
+  }
+  
   @Post('registrarColono')
   registerColono(@Body() body: any) {
     return this.colonoService.registerColono(body);

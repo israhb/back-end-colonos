@@ -15,6 +15,7 @@ import { ModulosService } from 'src/modulos/modulos.service';
 export class ColonoService {
 
   createDtoColono: CreateColonoDto;
+  updateColonoDto: UpdateColonoDto;
 
   constructor(
     @InjectRepository(Colono)  private colonoRepository: Repository<Colono>,
@@ -74,7 +75,33 @@ export class ColonoService {
       relations:['folio', 'level']
     });
   }
-
+  //cuando el colono actualiza sus datos por primera vez
+  async registerColonoData(body: any){
+    const folioFound = await this.folioService.findOne(body.folio_id);
+    if(!folioFound){
+      throw new NotFoundException('No se encontro Folio');
+    }
+    if(folioFound.nuevo == 1){
+      const colonoFound = await this.colonoRepository.findOne({
+        where:{
+          folio_id: folioFound.id,
+          password: body.password
+        }
+      });
+      if(!colonoFound){
+        throw new NotFoundException('No se encontro Colono');
+      }
+      if(colonoFound.registrado == "0"){
+        this.updateColonoDto = {...body};
+        return this.colonoRepository.update(body.id, this.updateColonoDto);
+      }else if(colonoFound.registrado == "1"){
+        throw new NotFoundException('Colono Ya fue registrado');  
+      }
+    }else{
+      throw new NotFoundException('Folio aun no esta dado de alta');
+    }
+  }
+  //registrar del lado del policia
   async registerColono(body: any){
     const folioFound = await this.folioService.findOne(body.folio_id);
     if(!folioFound){
