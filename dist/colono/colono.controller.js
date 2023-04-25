@@ -31,6 +31,9 @@ let ColonoController = class ColonoController {
     findAllColonos() {
         return this.colonoService.findAllTipoColonosLevel();
     }
+    registerColonoData(body) {
+        return this.colonoService.registerColonoData(body);
+    }
     registerColono(body) {
         return this.colonoService.registerColono(body);
     }
@@ -66,6 +69,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], ColonoController.prototype, "findAllColonos", null);
+__decorate([
+    (0, common_1.Post)('registrarColonoData'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], ColonoController.prototype, "registerColonoData", null);
 __decorate([
     (0, common_1.Post)('registrarColono'),
     __param(0, (0, common_1.Body)()),

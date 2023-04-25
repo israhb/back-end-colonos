@@ -25,6 +25,9 @@ let PagoController = class PagoController {
     create(createPagoDto) {
         return this.pagoService.create(createPagoDto);
     }
+    getPagoColonoId(id) {
+        return this.pagoService.getPagoColono(id);
+    }
     findAll() {
         return this.pagoService.findAll();
     }
@@ -46,7 +49,14 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], PagoController.prototype, "create", null);
 __decorate([
-    (0, common_1.Get)(),
+    (0, common_1.Get)('pagoColono/:id'),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], PagoController.prototype, "getPagoColonoId", null);
+__decorate([
+    (0, common_1.Get)(':id'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)

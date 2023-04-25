@@ -18,10 +18,12 @@ export declare class ColonoService {
     private modulosService;
     private serviceGeneralService;
     createDtoColono: CreateColonoDto;
+    updateColonoDto: UpdateColonoDto;
     constructor(colonoRepository: Repository<Colono>, folioService: FolioService, levelService: LevelService, loginCount: LoginCountService, permisosService: PermisosService, modulosService: ModulosService, serviceGeneralService: ServiceGeneralService);
     create(createColonoDto: CreateColonoDto): Promise<Colono | HttpException>;
     findAll(): Promise<Colono[]>;
     findAllTipoColonosLevel(): Promise<Colono[]>;
+    registerColonoData(body: any): Promise<import("typeorm").UpdateResult>;
     registerColono(body: any): Promise<Colono>;
     loginColono(folio_pass: any): Promise<Colono | {
         colono: Colono;

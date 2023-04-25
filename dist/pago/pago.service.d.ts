@@ -11,8 +11,9 @@ export declare class PagoService {
     private tipoPagoService;
     constructor(pagoRepository: Repository<Pago>, colonoService: ColonoService, tipoPagoService: TipoPagoService);
     create(createPagoDto: CreatePagoDto): Promise<Pago | HttpException>;
+    getPagoColono(id: number): Promise<any[]>;
     findAll(): Promise<Pago[]>;
     findOne(id: number): Promise<Pago | HttpException>;
-    update(id: number, updatePagoDto: UpdatePagoDto): Promise<import("typeorm").UpdateResult | HttpException>;
-    remove(id: number): Promise<import("typeorm").UpdateResult | HttpException>;
+    update(id: number, updatePagoDto: UpdatePagoDto): Promise<HttpException | import("typeorm").UpdateResult>;
+    remove(id: number): Promise<HttpException | import("typeorm").UpdateResult>;
 }

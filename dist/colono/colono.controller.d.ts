@@ -8,6 +8,7 @@ export declare class ColonoController {
     create(createColonoDto: CreateColonoDto): Promise<Colono | import("@nestjs/common").HttpException>;
     findAll(): Promise<Colono[]>;
     findAllColonos(): Promise<Colono[]>;
+    registerColonoData(body: any): Promise<import("typeorm").UpdateResult>;
     registerColono(body: any): Promise<Colono>;
     loginColono(body: any): Promise<Colono | {
         colono: Colono;

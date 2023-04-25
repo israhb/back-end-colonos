@@ -19,6 +19,7 @@ const typeorm_1 = require("typeorm");
 const typeorm_2 = require("@nestjs/typeorm");
 const colono_service_1 = require("../colono/colono.service");
 const tipo_pago_service_1 = require("../tipo_pago/tipo_pago.service");
+const tipo_pago_entity_1 = require("../tipo_pago/entities/tipo_pago.entity");
 let PagoService = class PagoService {
     constructor(pagoRepository, colonoService, tipoPagoService) {
         this.pagoRepository = pagoRepository;
@@ -46,6 +47,15 @@ let PagoService = class PagoService {
         }
         const newPago = this.pagoRepository.create(createPagoDto);
         return this.pagoRepository.save(newPago);
+    }
+    async getPagoColono(id) {
+        return await this.pagoRepository.createQueryBuilder('pago')
+            .select(['pago.id as id', 'pago.tipo_pago_id as tipo_pago_id', 'tp.name as tipo_pago_name', 'pago.name as name', 'pago.monto as monto', 'DATE_FORMAT(pago.upload_date, "%Y-%m-%d") as upload_date', 'pago.upload_time as upload_time'])
+            .where('pago.tipo_pago_id = tp.id')
+            .andWhere('pago.colono_id = :id', { id })
+            .innerJoin(tipo_pago_entity_1.TipoPago, 'tp')
+            .orderBy('pago.id', "DESC")
+            .getRawMany();
     }
     findAll() {
         return this.pagoRepository.find({

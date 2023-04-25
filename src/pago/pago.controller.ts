@@ -15,7 +15,12 @@ export class PagoController {
     return this.pagoService.create(createPagoDto);
   }
 
-  @Get()
+  @Get('pagoColono/:id')
+  getPagoColonoId(@Param('id', ParseIntPipe) id: number) {
+    return this.pagoService.getPagoColono(id);
+  }
+
+  @Get(':id')
   findAll(): Promise<Pago[]> {
     return this.pagoService.findAll();
   }

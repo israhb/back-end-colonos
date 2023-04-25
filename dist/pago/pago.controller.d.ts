@@ -6,8 +6,9 @@ export declare class PagoController {
     private pagoService;
     constructor(pagoService: PagoService);
     create(createPagoDto: CreatePagoDto): Promise<Pago | import("@nestjs/common").HttpException>;
+    getPagoColonoId(id: number): Promise<any[]>;
     findAll(): Promise<Pago[]>;
     findOne(id: number): Promise<Pago | import("@nestjs/common").HttpException>;
-    update(id: number, updatePagoDto: UpdatePagoDto): Promise<import("typeorm").UpdateResult | import("@nestjs/common").HttpException>;
-    remove(id: number): Promise<import("typeorm").UpdateResult | import("@nestjs/common").HttpException>;
+    update(id: number, updatePagoDto: UpdatePagoDto): Promise<import("@nestjs/common").HttpException | import("typeorm").UpdateResult>;
+    remove(id: number): Promise<import("@nestjs/common").HttpException | import("typeorm").UpdateResult>;
 }

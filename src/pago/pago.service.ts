@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ColonoService } from 'src/colono/colono.service';
 import { TipoPagoService } from 'src/tipo_pago/tipo_pago.service';
+import { TipoPago } from 'src/tipo_pago/entities/tipo_pago.entity';
 
 @Injectable()
 export class PagoService {
@@ -39,6 +40,16 @@ export class PagoService {
     }
     const newPago = this.pagoRepository.create(createPagoDto);
     return this.pagoRepository.save(newPago);
+  }
+
+  async getPagoColono(id: number){
+    return await this.pagoRepository.createQueryBuilder('pago')
+    .select(['pago.id as id', 'pago.tipo_pago_id as tipo_pago_id', 'tp.name as tipo_pago_name', 'pago.name as name', 'pago.monto as monto', 'DATE_FORMAT(pago.upload_date, "%Y-%m-%d") as upload_date', 'pago.upload_time as upload_time'])
+    .where('pago.tipo_pago_id = tp.id')
+    .andWhere('pago.colono_id = :id', {id})
+    .innerJoin(TipoPago, 'tp')
+    .orderBy('pago.id', "DESC")
+    .getRawMany();
   }
 
   findAll() {

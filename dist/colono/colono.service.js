@@ -78,6 +78,33 @@ let ColonoService = class ColonoService {
             relations: ['folio', 'level']
         });
     }
+    async registerColonoData(body) {
+        const folioFound = await this.folioService.findOne(body.folio_id);
+        if (!folioFound) {
+            throw new common_1.NotFoundException('No se encontro Folio');
+        }
+        if (folioFound.nuevo == 1) {
+            const colonoFound = await this.colonoRepository.findOne({
+                where: {
+                    folio_id: folioFound.id,
+                    password: body.password
+                }
+            });
+            if (!colonoFound) {
+                throw new common_1.NotFoundException('No se encontro Colono');
+            }
+            if (colonoFound.registrado == "0") {
+                this.updateColonoDto = Object.assign({}, body);
+                return this.colonoRepository.update(body.id, this.updateColonoDto);
+            }
+            else if (colonoFound.registrado == "1") {
+                throw new common_1.NotFoundException('Colono Ya fue registrado');
+            }
+        }
+        else {
+            throw new common_1.NotFoundException('Folio aun no esta dado de alta');
+        }
+    }
     async registerColono(body) {
         const folioFound = await this.folioService.findOne(body.folio_id);
         if (!folioFound) {
